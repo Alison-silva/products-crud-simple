@@ -1,0 +1,48 @@
+-- Database: productdb
+
+-- DROP DATABASE productdb;
+
+CREATE DATABASE productdb
+  WITH OWNER = postgres
+       ENCODING = 'UTF8'
+       TABLESPACE = pg_default
+       LC_COLLATE = 'Portuguese_Brazil.1252'
+       LC_CTYPE = 'Portuguese_Brazil.1252'
+       CONNECTION LIMIT = -1;
+
+----------------------------------------------------
+
+-- Table: public.products
+
+-- DROP TABLE public.products;
+
+CREATE TABLE public.products
+(
+  id bigint NOT NULL DEFAULT nextval('prodsequence'::regclass),
+  description character varying(225),
+  qtd integer,
+  price double precision,
+  CONSTRAINT prod_pk PRIMARY KEY (id),
+  CONSTRAINT products_id_key UNIQUE (id)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE public.products
+  OWNER TO postgres;
+
+  -----------------------------------------------------
+  
+  -- Sequence: public.prodsequence
+
+-- DROP SEQUENCE public.prodsequence;
+
+CREATE SEQUENCE public.prodsequence
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 1
+  CACHE 1;
+ALTER TABLE public.prodsequence
+  OWNER TO postgres;
+  
